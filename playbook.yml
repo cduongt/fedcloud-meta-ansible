@@ -1,0 +1,21 @@
+- name: Configure common
+  hosts:
+    - nebulahost
+    - dockerhost
+  become: yes
+  roles:
+    - common
+
+- name: Install nebula core
+  hosts:
+    - nebulahost
+  become: yes
+  roles:
+    - nebulacore
+
+- name: Install Docker
+  hosts:
+    - dockerhost
+  become: yes
+  roles:
+    - docker

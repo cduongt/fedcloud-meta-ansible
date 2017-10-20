@@ -1,0 +1,10 @@
+- name: Add OpenNebula 5.4 repo
+  yum_repository:
+    name: opennebula
+    description: OpenNebula 5.4 repo
+    baseurl: http://downloads.opennebula.org/repo/5.4/CentOS/7/x86_64
+    gpgcheck: no
+    enabled: yes
+
+- name: Install opennebula
+  yum: name=opennebula

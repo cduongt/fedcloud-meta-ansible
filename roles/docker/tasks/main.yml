@@ -1,0 +1,27 @@
+- name: Install required packages
+  yum: name={{item}}
+  with_items:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+  
+- name: Add Docker key
+  rpm_key:
+     key: https://download.docker.com/linux/centos/gpg
+     state: present
+
+- name: Add Docker CE repository
+  yum_repository:
+    name: docker
+    description: Docker CE repo
+    baseurl: https://download.docker.com/linux/centos/7/x86_64/stable/
+    enabled: yes
+  
+- name: Install Docker CE
+  yum: name=docker-ce
+
+- name: Enable Docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
