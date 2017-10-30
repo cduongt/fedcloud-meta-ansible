@@ -2,3 +2,5 @@
   yum: name={{item}}
   with_items:
     - epel-release
+    - net-tools
+    - nmap

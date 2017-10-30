@@ -7,4 +7,35 @@
     enabled: yes
 
 - name: Install opennebula
-  yum: name=opennebula
+  yum: name={{item}}
+  with_items:
+    - opennebula
+    - opennebula-server
+
+- name: Delete pregenerated password
+  file:
+    path: /var/lib/one/.one/one_auth
+    state: absent
+
+- name: Set default password
+  become_user: oneadmin
+  lineinfile:
+    path: /var/lib/one/.one/one_auth
+    line: oneadmin:test
+    create: yes
+    mode: 0700
+
+- name: Enable and start opennebula
+  service:
+    name: opennebula
+    state: started
+    enabled: yes
+
+- name: Open port for opennebula
+  firewalld:
+    port: 2633/tcp
+    permanent: true
+    state: enabled
+  notify:
+    - Restart firewalld
+
