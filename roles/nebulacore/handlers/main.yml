@@ -1,2 +1,5 @@
 - name: Restart firewalld
   service: name=firewalld state=restarted
+
+- name: Restart opennebula
+  service: name=opennebula state=restarted

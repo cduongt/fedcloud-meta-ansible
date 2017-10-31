@@ -16,8 +16,8 @@ Vagrant.configure("2") do |config|
   config.ssh.private_key_path = ["~/.ssh/id_rsa", "~/.vagrant.d/insecure_private_key"]
   config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/authorized_keys"
 
-  config.vm.network "public_network",  bridge: "en0: Wi-Fi (AirPort)"
-  #config.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+  #config.vm.network "public_network",  bridge: "en0: Wi-Fi (AirPort)"
+  config.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
 
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "playbook.yml"

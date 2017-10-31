@@ -12,12 +12,12 @@
     - opennebula
     - opennebula-server
 
-- name: Delete pregenerated password
+- name: Delete pregenerated password for core
   file:
     path: /var/lib/one/.one/one_auth
     state: absent
 
-- name: Set default password
+- name: Set default password for core
   become_user: oneadmin
   lineinfile:
     path: /var/lib/one/.one/one_auth
@@ -30,6 +30,24 @@
     name: opennebula
     state: started
     enabled: yes
+
+- name: Delete pregenerated password for sunstone
+  file:
+    path: /var/lib/one/.one/sunstone_auth
+    state: absent
+
+- name: Set default password for sunstone
+  become_user: oneadmin
+  lineinfile:
+    path: /var/lib/one/.one/sunstone_auth
+    line: serveradmin:testtesttest
+    create: yes
+    mode: 0700
+
+- name: Change password for sunstone_auth
+  command: one_user passwd 1 testtesttest --sha1
+  notify:
+    - Restart opennebula
 
 - name: Open port for opennebula
   firewalld:
