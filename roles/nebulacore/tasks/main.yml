@@ -44,11 +44,6 @@
     create: yes
     mode: 0700
 
-- name: Change password for sunstone_auth
-  command: one_user passwd 1 testtesttest --sha1
-  notify:
-    - Restart opennebula
-
 - name: Open port for opennebula
   firewalld:
     port: 2633/tcp
@@ -56,4 +51,10 @@
     state: enabled
   notify:
     - Restart firewalld
+
+- name: Change password for sunstone_auth
+  become_user: oneadmin
+  command: "oneuser passwd 1 testtesttest --sha1"
+  notify:
+    - Restart opennebula
 

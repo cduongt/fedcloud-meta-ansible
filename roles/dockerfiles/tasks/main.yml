@@ -1,0 +1,17 @@
+- name: Create directory for dockerfiles
+  file:
+    path: /dockerfiles
+    state: directory
+    owner: root
+    mode: 0755
+
+- name: Copy sunstone
+  copy:
+    src: "{{playbook_dir}}/sunstone"
+    dest: /dockerfiles
+    directory_mode: yes
+
+- name: Build sunstone
+  docker_image:
+    path: /dockerfiles/sunstone
+    name: sunstone

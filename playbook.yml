@@ -19,4 +19,4 @@
   become: yes
   roles:
     - docker
-
+    - dockerfiles

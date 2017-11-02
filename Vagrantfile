@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "dockerhost" do |dockerhost|
     dockerhost.vm.network "forwarded_port", guest: 9869, host: 9869, auto_correct: true
+    dockerhost.vm.network "forwarded_port", guest: 2474, host: 2474, auto_correct: true
   end
 
   config.ssh.insert_key = false
@@ -20,6 +21,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
 
   config.vm.provision :ansible do |ansible|
+    ansible.verbose = true
     ansible.playbook = "playbook.yml"
   end
 end
