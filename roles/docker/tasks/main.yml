@@ -4,6 +4,7 @@
     - yum-utils
     - device-mapper-persistent-data
     - lvm2
+    - python-pip
   
 - name: Add Docker key
   rpm_key:
@@ -25,3 +26,7 @@
     name: docker
     state: started
     enabled: yes
+
+- name: Install docker-py
+  pip:
+    name: docker-py

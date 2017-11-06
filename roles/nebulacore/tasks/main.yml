@@ -52,6 +52,10 @@
   notify:
     - Restart firewalld
 
+- name: Pause for opennebula so it can start
+  pause:
+    seconds: 15
+
 - name: Change password for sunstone_auth
   become_user: oneadmin
   command: "oneuser passwd 1 testtesttest --sha1"
