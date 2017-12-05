@@ -1,37 +1,4 @@
 #!/bin/bash
-if [ ! -f /etc/one/.bootstrap]; then
-    rm /etc/one/sunstone-server.conf
-    cat >/etc/one/sunstone-server.conf << EOL
-:tmpdir: /var/tmp
-:one_xmlrpc: ${SUNSTONE_OPENNEBULA_ENDPOINT}
-:host: 0.0.0.0
-:port: 9869
-:sessions: memcache
-:memcache_host: ${SUNSTONE_MEMCACHE}
-:memcache_port: 11211
-:memcache_namespace: opennebula.sunstone
-:env: 'prod'
-:debug_level: 3
-:auth: opennebula
-:core_auth: cipher
-:remote_version: http://downloads.opennebula.org/latest
-:vnc_proxy_port: 29876
-:vnc_proxy_support_wss: no
-:vnc_proxy_cert:
-:vnc_proxy_key:
-:vnc_proxy_ipv6: false
-:vnc_request_password: false
-:lang: en_US
-:table_order: desc
-:marketplace_url: http://marketplace.opennebula.systems/
-:oneflow_server: ${SUNSTONE_ONEFLOW_ENDPOINT}
-:routes:
-    - oneflow
-    - vcenter
-    - support
-EOL
-    echo "serveradmin:${SUNSTONE_SERVERADMIN_SECRET}" >> /var/lib/one/.one/sunstone_auth
-    touch /etc/one/.bootstrap
-fi
+source ./create-conf.sh
 
 ruby /usr/lib/one/sunstone/sunstone-server.rb

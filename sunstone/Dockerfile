@@ -4,6 +4,7 @@ RUN curl http://downloads.opennebula.org/repo/repo.key -o repo.key && rpm --impo
     && yum -y install epel-release redhat-lsb-core nmap && yum -y install opennebula-sunstone
 RUN /usr/share/one/install_gems --yes && gem install puma
 RUN mkdir /var/lib/one/.one
+COPY create-conf.sh ./create-conf.sh
 COPY docker-entrypoint.sh ./docker-entrypoint.sh
 RUN chmod +x docker-entrypoint.sh
 EXPOSE 9869
