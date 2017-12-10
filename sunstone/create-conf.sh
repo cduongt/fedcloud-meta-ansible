@@ -5,10 +5,10 @@ cat >/etc/one/sunstone-server.conf << EOL
 :tmpdir: /var/tmp
 :one_xmlrpc: ${SUNSTONE_OPENNEBULA_ENDPOINT}
 :host: 0.0.0.0
-:port: 9869
+:port: ${SUNSTONE_PORT}
 :sessions: memcache
 :memcache_host: ${SUNSTONE_MEMCACHE}
-:memcache_port: 11211
+:memcache_port: ${SUNSTONE_MEMCACHE_PORT}
 :memcache_namespace: opennebula.sunstone
 :env: 'prod'
 :debug_level: 3
