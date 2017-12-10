@@ -15,4 +15,4 @@ cat >/etc/one/oneflow-server.conf << EOL
 :debug_level: 0
 EOL
 
-echo "serveradmin:$(cat "$ONEFLOW_SERVERADMIN_SECRET")" >> /var/lib/one/.one/oneflow_auth
+echo "serveradmin:$(cat "$ONEFLOW_SERVERADMIN_SECRET_FILE")" >> /var/lib/one/.one/oneflow_auth

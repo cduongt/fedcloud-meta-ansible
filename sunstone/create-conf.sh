@@ -31,4 +31,4 @@ cat >/etc/one/sunstone-server.conf << EOL
     - support
 EOL
 
-echo "serveradmin:$(cat "$SUNSTONE_SERVERADMIN_SECRET")" >> /var/lib/one/.one/sunstone_auth
+echo "serveradmin:$(cat "$SUNSTONE_SERVERADMIN_SECRET_FILE")" >> /var/lib/one/.one/sunstone_auth
