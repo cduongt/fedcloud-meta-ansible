@@ -1,0 +1,31 @@
+version: '3.3'
+services:
+  sunstone:
+    image: cduongt/opennebula-docker:sunstone
+    environment:
+      SUNSTONE_OPENNEBULA_ENDPOINT: http://fedcloud.metacentrum.cz:2633/RPC2
+      SUNSTONE_PORT: 9869
+      SUNSTONE_MEMCACHE: memcached
+      SUNSTONE_MEMCACHE_PORT: 11211
+      SUNSTONE_ONEFLOW_ENDPOINT: http://oneflow:2474
+      SUNSTONE_SERVERADMIN_SECRET_FILE: /run/secrets/serveradmin-secret
+    secrets:
+      - serveradmin-secret 
+    depends_on:
+      - memcached
+      - oneflow
+    ports:
+      - '9869:9869'
+  memcached:
+    image: memcached:latest
+  oneflow:
+    image: cduongt/opennebula-docker:oneflow
+    environment:
+      ONEFLOW_OPENNEBULA_ENDPOINT: http://fedcloud.metacentrum.cz:2633/RPC2
+      ONEFLOW_SERVERADMIN_SECRET_FILE: /run/secrets/serveradmin-secret
+    secrets:
+      - serveradmin-secret
+  
+secrets:
+  serveradmin-secret:
+    external: true
